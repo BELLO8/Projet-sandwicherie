@@ -23,10 +23,7 @@ if(isset($_GET['id'])){
 			}
 		} else{
 			
-		}
-
-	
-   
+		}   
 	}
 
     if($success === true){

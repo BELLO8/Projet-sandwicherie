@@ -18,7 +18,7 @@ if(isset($_GET['id'])){
 }
 
     if($success === true){
-    header('location: index.php');
+    header('location: cat.php');
     }
 
 ?>
