@@ -36,7 +36,7 @@ class Slide
         ]);
     }
 
-    public function update($id, $title, $description, $image = null, $position)
+    public function update($id, $title, $description, $image, $position)
     {
         $query = "UPDATE slides SET title = :title, description = :description, 
                  position = :position";

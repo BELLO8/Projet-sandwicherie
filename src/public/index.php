@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../config/Router.php';
-require_once __DIR__ . '/../controllers/PublicationController.php';
 require_once __DIR__ . '/../controllers/dashboard/CategoryController.php';
 require_once __DIR__ . '/../controllers/dashboard/SlideController.php';
 require_once __DIR__ . '/../models/Publication.php';

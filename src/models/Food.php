@@ -42,7 +42,7 @@ class Food
         ]);
     }
 
-    public function update($id, $name, $description, $price, $image = null, $category_id)
+    public function update($id, $name, $description, $price, $image , $category_id)
     {
         $query = "UPDATE food SET name = :name, description = :description, 
                  price = :price, category_id = :category_id";

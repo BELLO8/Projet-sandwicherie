@@ -35,7 +35,7 @@ class Publication
         ]);
     }
 
-    public function update($id, $title, $description, $image = null)
+    public function update($id, $title, $description, $image)
     {
         $query = "UPDATE publications SET title = :title, description = :description";
         $params = ['id' => $id, 'title' => $title, 'description' => $description];

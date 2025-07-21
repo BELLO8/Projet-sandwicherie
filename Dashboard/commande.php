@@ -20,21 +20,21 @@ $sql = "SELECT * FROM commande WHERE 1=1";
 $params = [];
 
 if ($search_nom) {
-	$sql .= " AND (nom_cli LIKE ? OR prenom_cli LIKE ?)";
-	$params[] = "%$search_nom%";
-	$params[] = "%$search_nom%";
+    $sql .= " AND (nom_cli LIKE ? OR prenom_cli LIKE ?)";
+    $params[] = "%$search_nom%";
+    $params[] = "%$search_nom%";
 }
 if ($search_numero) {
-	$sql .= " AND num_cli LIKE ?";
-	$params[] = "%$search_numero%";
+    $sql .= " AND num_cli LIKE ?";
+    $params[] = "%$search_numero%";
 }
 if ($search_status !== '') {
-	$sql .= " AND status_command = ?";
-	$params[] = $search_status;
+    $sql .= " AND status_command = ?";
+    $params[] = $search_status;
 }
 if ($search_date) {
-	$sql .= " AND DATE(date_comm) = ?";
-	$params[] = $search_date;
+    $sql .= " AND DATE(date_comm) = ?";
+    $params[] = $search_date;
 }
 
 // Comptage total des résultats
@@ -174,12 +174,12 @@ include('includes/sidenav.php');
                                             </thead>
                                             <tbody>
                                                 <?php
-														$total = 0;
-														$produits = unserialize($commande->produits_command);
-														foreach ($produits as $produit) :
-															$sous_total = $produit['item_price'] * $produit['item_qte'];
-															$total += $sous_total;
-														?>
+                                                        $total = 0;
+                                                        $produits = unserialize($commande->produits_command);
+                                                        foreach ($produits as $produit) :
+                                                            $sous_total = $produit['item_price'] * $produit['item_qte'];
+                                                            $total += $sous_total;
+                                                        ?>
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex align-items-center">
@@ -259,6 +259,10 @@ include('includes/sidenav.php');
                         <?php else: ?>
                         <a href="update_status.php?id=<?= $commande->id_command ?>&status=0" class="btn btn-warning">
                             <i class="fa fa-refresh"></i> Remettre en attente
+                        </a>
+                        <a href="recu.php?id=<?= $commande->id_command ?>" class="btn btn-info" target="_blank"
+                            title="Imprimer le reçu">
+                            <i class="fa fa-print"></i> Imprimer le reçu
                         </a>
                         <?php endif; ?>
                     </td>
