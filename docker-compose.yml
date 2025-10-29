@@ -55,9 +55,9 @@ services:
       - db
     environment:
       - DB_HOST=${DB_HOST}
-      - DB_USER=${DB_USER}
+      - DB_USER=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
-      - DB_NAME=${DB_NAME}
+      - DB_NAME=${DB_USERNAME}
 
   db:
     image: mysql:8.0
@@ -69,6 +69,7 @@ services:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+
     volumes:
       - mysql_data:/var/lib/mysql
 
@@ -80,7 +81,7 @@ services:
       - "${PHPMYADMIN_PORT}:80"
     environment:
       - PMA_HOST=${DB_HOST}
-      - PMA_USER=${DB_USER}
+      - PMA_USER=${DB_USERNAME}
       - PMA_PASSWORD=${DB_PASSWORD}
       - PMA_ARBITRARY=1
     depends_on:

@@ -1,47 +1,67 @@
 <?php
+
 class DB
 {
-
-    private $host = 'localhost';
-    private $database = 'resto';
-    private $user = 'root';
-    private $password = '';
+    private $host;
+    private $database;
+    private $user;
+    private $password;
     public $db;
 
-    public function __construct($host = null, $database = null, $user = null, $password = null)
+    public function __construct()
     {
-        if ($host != null) {
-            $this->host = $host;
-            $this->database = $database;
-            $this->user = $user;
-            $this->password = $password;
-        }
+        // Lecture des variables d'environnement
+        $this->host = getenv('DB_HOST') ?: 'localhost';
+        $this->database = getenv('DB_DATABASE') ?: 'resto';
+        $this->user = getenv('DB_USERNAME') ?: 'root';
+        $this->password = getenv('DB_PASSWORD') ?: '';
+
         try {
-            $this->db = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->database, $this->user, $this->password, array(
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8'
-
-            ));
+            $this->db = new PDO(
+                "mysql:host={$this->host};dbname={$this->database};charset=utf8",
+                $this->user,
+                $this->password,
+                [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+                ]
+            );
         } catch (PDOException $e) {
-            die('impossible de se connecter a la base de donnee !');
+            // Gestion de l'erreur selon le mode debug
+            if (getenv('APP_DEBUG') === 'true') {
+                die("Erreur de connexion à la base de données : " . $e->getMessage());
+            } else {
+                die("Impossible de se connecter à la base de données !");
+            }
         }
     }
-    public function select($sql, $data = array())
+
+    // SELECT → retourne plusieurs lignes
+    public function select($sql, $data = [])
     {
         $req = $this->db->prepare($sql);
         $req->execute($data);
-        return $req->fetchAll(PDO::FETCH_OBJ);
+        return $req->fetchAll();
     }
 
+    // INSERT / UPDATE / DELETE → exécution simple
+    public function query($sql, $data = [])
+    {
+        $req = $this->db->prepare($sql);
+        return $req->execute($data);
+    }
 
-    public function query($sql, $data = array())
+    // COUNT → retourne un entier
+    public function count($sql, $data = [])
     {
         $req = $this->db->prepare($sql);
         $req->execute($data);
+        return (int) $req->fetchColumn();
     }
 
-    public function count($sql)
+    // Retourne l'ID de la dernière insertion
+    public function lastInsertId()
     {
-        return $req = (int)$this->db->query($sql)->fetch(PDO::FETCH_NUM)[0];
+        return $this->db->lastInsertId();
     }
 }
