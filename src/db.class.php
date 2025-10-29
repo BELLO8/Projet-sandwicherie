@@ -2,10 +2,10 @@
 class DB
 {
 
-    private $host = 'localhost';
+    private $host = 'bello-spaces-dbmysql-5qjyrf';
     private $database = 'resto';
-    private $user = 'root';
-    private $password = '';
+    private $user = 'user_apps';
+    private $password = '12345678';
     public $db;
 
     public function __construct($host = null, $database = null, $user = null, $password = null)
