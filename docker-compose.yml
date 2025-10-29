@@ -1,29 +1,90 @@
+# version: '3'
+
+# services:
+#   web:
+#     build: .
+#     ports:
+#       - "8080:80"
+#     volumes:
+#       - .:/var/www/html
+#     depends_on:
+#       - db
+#     environment:
+#       - DB_HOST=db
+#       - DB_USER=root
+#       - DB_PASSWORD=
+#       - DB_NAME=resto
+
+#   db:
+#     image: mysql:8.0
+#     ports:
+#       - "3306:3306"
+#     environment:
+#       - MYSQL_ROOT_PASSWORD=
+#       - MYSQL_DATABASE=resto
+#     volumes:
+#       - mysql_data:/var/lib/mysql
+
+#     phpmyadmin:
+#       image: phpmyadmin/phpmyadmin:latest
+#       container_name: phpmyadmin
+#       restart: always
+#       ports:
+#         - "8081:80"
+#       environment:
+#         - PMA_HOST=db
+#         - PMA_USER=root
+#         - PMA_PASSWORD=
+#         - PMA_ARBITRARY=1
+#       depends_on:
+#         - db
+
+# volumes:
+#   mysql_data: 
+
 version: '3'
 
 services:
   web:
     build: .
     ports:
-      - "8080:80"
+      - "${WEB_PORT}:80"
     volumes:
       - .:/var/www/html
     depends_on:
       - db
     environment:
-      - DB_HOST=localhost
-      - DB_USER=root
-      - DB_PASSWORD=
-      - DB_NAME=resto
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
 
   db:
     image: mysql:8.0
+    container_name: mysql_db
     ports:
       - "3306:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=
-      - MYSQL_DATABASE=resto
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - mysql_data:/var/lib/mysql
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - "${PHPMYADMIN_PORT}:80"
+    environment:
+      - PMA_HOST=${DB_HOST}
+      - PMA_USER=${DB_USER}
+      - PMA_PASSWORD=${DB_PASSWORD}
+      - PMA_ARBITRARY=1
+    depends_on:
+      - db
+
 volumes:
-  mysql_data: 
+  mysql_data:
