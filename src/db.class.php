@@ -5,7 +5,7 @@ class DB
     private $host = 'bello-spaces-dbmysql-5qjyrf';
     private $database = 'resto';
     private $user = 'user_apps';
-    private $password = '12345678';
+    private $password = 'secret123';
     public $db;
 
     public function __construct($host = null, $database = null, $user = null, $password = null)
