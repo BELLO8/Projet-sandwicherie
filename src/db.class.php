@@ -2,7 +2,7 @@
 class DB
 {
 
-    private $host = 'bello-spaces-dbmysql-5qjyrf';
+    private $host = 'db';
     private $database = 'resto';
     private $user = 'user_apps';
     private $password = 'secret123';

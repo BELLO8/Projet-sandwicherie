@@ -6,7 +6,7 @@ $compos = ['pain'];
 ?>
 
 <div class="banner full-screen-mode"
-    style="background:url(../assets/images/IMG_2182.jpg) no-repeat center;background-size:cover; ">
+    style="background:url(../assets/images/IMG_218.jpg) no-repeat center;background-size:cover; ">
     <div class="container">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="banner-static">
