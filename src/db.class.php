@@ -2,10 +2,11 @@
 
 class DB
 {
-    private $host;
-    private $database;
-    private $user;
-    private $password;
+
+    private $host = 'bello-spaces-dbmysql-5qjyrf';
+    private $database = 'resto';
+    private $user = 'user_apps';
+    private $password = 'secret123';
     public $db;
 
     public function __construct()
