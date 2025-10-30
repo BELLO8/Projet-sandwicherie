@@ -16,14 +16,10 @@ $router->map('POST', '/Merci', 'merci', 'merci');
 $match = $router->match();
 
 if (is_array($match)) {
-    if ($match['target'] != "editpan") {
-        ob_start();
-        require "pages/{$match['target']}.php";
-        $pagecontent = ob_get_clean();
-        require 'elements/part.php';
-    } else {
-        require "pages/{$match['target']}.php";
-    }
+    ob_start();
+    require "pages/{$match['target']}.php";
+    $pagecontent = ob_get_clean();
+    require 'elements/part.php';
 } elseif (!$match) {
     require 'pages/404.php';
 }
